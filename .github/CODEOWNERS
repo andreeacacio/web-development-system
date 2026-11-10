@@ -1,0 +1,12 @@
+# CODEOWNERS — responsáveis pela revisão de alterações
+# https://docs.github.com/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+# A última regra que corresponder ao arquivo tem prioridade.
+
+# Responsável padrão por todo o repositório
+*                       @andreeacacio
+
+# Áreas sensíveis (segurança, configuração do Claude Code e automações)
+/.claude/               @andreeacacio
+/.github/               @andreeacacio
+/SECURITY.md            @andreeacacio
+/.gitignore             @andreeacacio
