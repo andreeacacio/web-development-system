@@ -12,6 +12,12 @@
       "sourceType": "github",
       "skillPath": "skills/frontend-design/SKILL.md",
       "computedHash": "89496d5dd00f4810205f351759594fc2742bf8eea85a2f2b2d1de59f4bd91576"
+    },
+    "motionsites-web-builder": {
+      "source": "motionsites-ai/claude-skill",
+      "sourceType": "github",
+      "skillPath": "plugins/motionsites-web-builder/skills/motionsites-web-builder/SKILL.md",
+      "computedHash": "7d2baf459c85a21fd7be4f0b4d5eb0f797197129b2886b626bd3a8788286edb4"
     }
   }
 }

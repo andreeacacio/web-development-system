@@ -16,6 +16,7 @@ Registro do andamento do projeto. Atualize ao concluir cada etapa.
 | Fundação do projeto | `defa274` | `.claude/settings.json`, `.editorconfig`, `.github/CODEOWNERS`, `.gitignore`, `SECURITY.md` |
 | Context Optimization instalada | `e103271` | Skill em `.claude/skills/context-optimization/` e registro em `skills-lock.json` |
 | Organização das instruções | `dda47c6` | `CLAUDE.md` (instruções permanentes) e `PROGRESS.md` (andamento) |
+| MotionSites instalada | ver `git log` | Skill `motionsites-web-builder` em `.claude/skills/`, `LICENSE` original, `references/techniques.md` de compatibilidade, regra antipublicidade e revisão visual no `CLAUDE.md` |
 
 ## Em andamento
 
@@ -25,7 +26,7 @@ Registro do andamento do projeto. Atualize ao concluir cada etapa.
 
 1. Instalações planejadas, uma por vez e com revisão prévia do conteúdo:
    - [ ] Frontend Design
-   - [ ] MotionSites
+   - [x] MotionSites
    - [ ] Superpowers
    - [ ] Marketing Skills
 
