@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "context-optimization": {
+      "source": "muratcankoylan/Agent-Skills-for-Context-Engineering",
+      "sourceType": "github",
+      "skillPath": "skills/context-optimization/SKILL.md",
+      "computedHash": "8f88a8b9aa7e78d0e8bae571ff452dec0c037f8c20275540d396291aeea43606"
+    }
+  }
+}
