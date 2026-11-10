@@ -18,6 +18,42 @@
       "sourceType": "github",
       "skillPath": "plugins/motionsites-web-builder/skills/motionsites-web-builder/SKILL.md",
       "computedHash": "7d2baf459c85a21fd7be4f0b4d5eb0f797197129b2886b626bd3a8788286edb4"
+    },
+    "test-driven-development": {
+      "source": "obra/superpowers",
+      "sourceType": "github",
+      "skillPath": "skills/test-driven-development/SKILL.md",
+      "version": "v7.0.2",
+      "commit": "22f0b463e7a5e579904dd6211a520321035526f7",
+      "license": "MIT",
+      "computedHash": "64b03fce4aee5a97a93160cea8111f3ba13a17b7c001db4bd5836d67fd10705d"
+    },
+    "systematic-debugging": {
+      "source": "obra/superpowers",
+      "sourceType": "github",
+      "skillPath": "skills/systematic-debugging/SKILL.md",
+      "version": "v7.0.2",
+      "commit": "22f0b463e7a5e579904dd6211a520321035526f7",
+      "license": "MIT",
+      "computedHash": "51c6435d98c83c42c96ba7c35725a0b2c376cd487fb1a4e6bd0ddbe7e33ef202"
+    },
+    "verification-before-completion": {
+      "source": "obra/superpowers",
+      "sourceType": "github",
+      "skillPath": "skills/verification-before-completion/SKILL.md",
+      "version": "v7.0.2",
+      "commit": "22f0b463e7a5e579904dd6211a520321035526f7",
+      "license": "MIT",
+      "computedHash": "2befe7fc55bcadaa3d97dd9e8efeb633d2561c0ebe74c5a8b17c4d9e7e4520b3"
+    },
+    "requesting-code-review": {
+      "source": "obra/superpowers",
+      "sourceType": "github",
+      "skillPath": "skills/requesting-code-review/SKILL.md",
+      "version": "v7.0.2",
+      "commit": "22f0b463e7a5e579904dd6211a520321035526f7",
+      "license": "MIT",
+      "computedHash": "2180e14a448e9410bec88e6646a2d1f0ce7fdd58de27388c1e052e929679d2bc"
     }
   }
 }
