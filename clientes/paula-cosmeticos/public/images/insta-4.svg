@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" preserveAspectRatio="xMidYMid slice" role="img">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#F7EFE7"/><stop offset="1" stop-color="#E8D5C5"/>
+</linearGradient>
+<radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+<stop offset="0" stop-color="#FFFDF9" stop-opacity="0.95"/>
+<stop offset="1" stop-color="#FFFDF9" stop-opacity="0"/>
+</radialGradient>
+<radialGradient id="vig" cx="0.5" cy="0.45" r="0.75">
+<stop offset="0.6" stop-color="#3a2420" stop-opacity="0"/>
+<stop offset="1" stop-color="#3a2420" stop-opacity="0.22"/>
+</radialGradient>
+<linearGradient id="goldG" x1="0" x2="1">
+<stop offset="0" stop-color="#8E5A5E"/><stop offset="0.35" stop-color="#F3DDDF"/>
+<stop offset="0.6" stop-color="#C99A9C"/><stop offset="1" stop-color="#8E5A5E"/>
+</linearGradient>
+<linearGradient id="pedG" x1="0" x2="1">
+<stop offset="0" stop-color="#E4CDBE"/><stop offset="0.45" stop-color="#FBF5EF"/>
+<stop offset="1" stop-color="#D9BEAE"/>
+</linearGradient>
+<filter id="blur40"><feGaussianBlur stdDeviation="40"/></filter>
+<filter id="blur12"><feGaussianBlur stdDeviation="12"/></filter>
+<filter id="blur4"><feGaussianBlur stdDeviation="4"/></filter>
+<filter id="grain" x="0" y="0" width="100%" height="100%">
+<feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/>
+<feColorMatrix values="0 0 0 0 0.3  0 0 0 0 0.2  0 0 0 0 0.18  0 0 0 0.09 0"/>
+</filter></defs>
+<rect width="800" height="800" fill="url(#bg)"/>
+<circle cx="400" cy="280" r="480" fill="url(#glow)"/>
+<circle cx="96" cy="720" r="240" fill="#E8C3BE" opacity="0.35" filter="url(#blur40)"/>
+<path d="M0 576 C 200 463.99999999999994, 360 688, 560 560 S 800 496, 800 496 L 800 800 L 0 800 Z" fill="#E8C3BE" opacity="0.3"/>
+<path d="M0 640 C 240 560, 440.00000000000006 736, 800 608 L 800 800 L 0 800 Z" fill="#FFFAF5" opacity="0.5"/><defs><linearGradient id="jar1" x1="0" x2="1">
+<stop offset="0" stop-color="#F3E1D6"/><stop offset="0.3" stop-color="#FFF8F3"/>
+<stop offset="0.6" stop-color="#F3E1D6"/><stop offset="1" stop-color="#C9A595"/></linearGradient></defs>
+<ellipse cx="330" cy="600" rx="102" ry="16.32" fill="#5a3a30" opacity="0.22" filter="url(#blur12)"/>
+<rect x="245" y="538" width="170" height="62" rx="10.2" fill="url(#jar1)"/>
+<ellipse cx="330" cy="598" rx="85" ry="10.2" fill="#C9A595" opacity="0.6"/>
+<rect x="241.6" y="500" width="176.8" height="38" rx="8.5" fill="url(#goldG)"/>
+<ellipse cx="330" cy="500" rx="88.4" ry="10.2" fill="#EAD5B3"/><defs><linearGradient id="tube2" x1="0" x2="1"><stop offset="0" stop-color="#F0DCD0"/>
+<stop offset="0.35" stop-color="#FFF9F4"/><stop offset="1" stop-color="#F0DCD0"/></linearGradient></defs>
+<ellipse cx="500" cy="600" rx="70" ry="11.200000000000001" fill="#5a3a30" opacity="0.22" filter="url(#blur12)"/>
+<rect x="468" y="561.6" width="64" height="38.4" rx="4" fill="url(#goldG)"/>
+<path d="M462 561.6 L450 374.4 L550 374.4 L538 561.6 Z" fill="url(#tube2)"/>
+<rect x="448" y="360" width="104" height="19.2" fill="#E2BDBE"/>
+<rect x="480" y="444" width="40" height="52.8" rx="3" fill="#FBF6F0" opacity="0.7"/>
+<rect width="800" height="800" fill="url(#vig)"/>
+<rect width="800" height="800" filter="url(#grain)"/>
+</svg>

@@ -1,0 +1,57 @@
+---
+import Icon from './Icon.astro';
+import { site, contactUrl, contactLabel } from '../data/site';
+const hasNumber = Boolean(site.whatsapp);
+---
+<section class="contact" id="contato" aria-labelledby="contact-title">
+  <div class="wrap contact__inner" data-reveal>
+    <p class="eyebrow">Contato</p>
+    <h2 id="contact-title" class="contact__title">Vamos <em>conversar?</em></h2>
+    <p class="lead">Tire dúvidas, consulte produtos e disponibilidade. Será um prazer atender você.</p>
+    <div class="contact__actions">
+      <a class="btn" href={contactUrl} target="_blank" rel="noopener">
+        <Icon name={hasNumber ? 'whatsapp' : 'message'} /> {contactLabel}
+      </a>
+      {hasNumber && site.instagram.url && (
+        <a class="btn btn--ghost" href={site.instagram.url} target="_blank" rel="noopener"><Icon name="instagram" /> Instagram</a>
+      )}
+    </div>
+
+    {site.whatsappGroup && (
+      <a class="vip" href={site.whatsappGroup} target="_blank" rel="noopener">
+        <span class="vip__badge">VIP</span>
+        <span class="vip__text">
+          <strong>Grupo de Clientes VIPs</strong>
+          <span>Promoções e novidades exclusivas no WhatsApp</span>
+        </span>
+        <Icon name="arrow" />
+      </a>
+    )}
+  </div>
+</section>
+
+<style>
+  .contact { position: relative; overflow: hidden; padding-block: clamp(5rem, 12vw, 9rem); background: linear-gradient(150deg, #d6aeaf 0%, #e9cfc9 55%, #f3e6df 100%); }
+  .contact::before, .contact::after { content: ''; position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.7; animation: drift 18s ease-in-out infinite alternate; }
+  .contact::before { width: 28rem; height: 28rem; background: #faf5ef; top: -10rem; left: -8rem; }
+  .contact::after { width: 22rem; height: 22rem; background: #c99295; bottom: -10rem; right: -6rem; animation-delay: -6s; }
+  .contact__inner { position: relative; z-index: 1; display: grid; justify-items: center; gap: 1.3rem; text-align: center; }
+  .contact__inner .eyebrow { color: var(--ink); }
+  .contact__title { font-size: clamp(3rem, 11vw, 6.5rem); }
+  .contact__title em { font-style: italic; }
+  .contact .lead { color: var(--ink); opacity: 0.8; }
+  .contact__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; margin-top: 0.6rem; }
+  .vip {
+    display: flex; align-items: center; gap: 1rem; margin-top: 1.4rem; padding: 0.9rem 1.3rem 0.9rem 0.9rem;
+    max-width: 26rem; text-align: left; text-decoration: none;
+    background: rgb(250 245 239 / 0.6); border: 1px solid rgb(63 42 45 / 0.18); border-radius: 999px;
+    transition: background 0.5s var(--ease), transform 0.5s var(--ease);
+  }
+  .vip:hover { background: rgb(251 247 242 / 0.9); transform: translateY(-2px); }
+  .vip__badge { flex: none; display: grid; place-items: center; width: 3rem; height: 3rem; border-radius: 50%; background: var(--rose); color: var(--ink); font: 500 0.72rem/1 var(--sans); letter-spacing: 0.16em; padding-left: 0.16em; }
+  .vip__text { display: grid; line-height: 1.35; }
+  .vip__text strong { font-family: var(--serif); font-weight: 500; font-size: 1.25rem; }
+  .vip__text span { font-size: 0.85rem; }
+  .vip :global(.icon) { margin-left: auto; }
+  @keyframes drift { to { transform: translate(4rem, 2rem) scale(1.1); } }
+</style>

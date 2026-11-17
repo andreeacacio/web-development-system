@@ -1,0 +1,10 @@
+---
+// Logotipo "Paula Cosméticos" em forma livre (letras do logo oficial, fundo transparente).
+interface Props { tone?: 'ink' | 'light'; height?: string }
+const { tone = 'ink', height = 'var(--logo-h, 3.4rem)' } = Astro.props;
+const src = tone === 'light' ? '/images/logo-paula-wordmark-light.png' : '/images/logo-paula-wordmark.png';
+---
+<img class="logo" src={src} alt="Paula Cosméticos" width="720" height="329" style={`--h:${height}`} decoding="async" />
+<style>
+  .logo { display: block; height: var(--h); width: auto; max-width: none; }
+</style>

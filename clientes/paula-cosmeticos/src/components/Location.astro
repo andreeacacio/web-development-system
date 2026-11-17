@@ -1,0 +1,84 @@
+---
+import Icon from './Icon.astro';
+import { site, fullAddress, mapsQuery, contactUrl } from '../data/site';
+const mapsLink = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
+const embed = `https://maps.google.com/maps?q=${mapsQuery}&z=16&output=embed`;
+---
+<section class="section loc" id="visite" aria-labelledby="loc-title">
+  <div class="wrap loc__grid">
+    <div class="loc__text" data-reveal>
+      <div class="head">
+        <p class="eyebrow">Localização</p>
+        <h2 id="loc-title" class="title">Venha nos <em>visitar</em></h2>
+      </div>
+      <dl class="loc__info">
+        <div>
+          <dt><Icon name="pin" /> Endereço</dt>
+          <dd>
+            <address>{site.address.street}<br />{site.address.district} · {site.address.city}/{site.address.state}</address>
+            {site.address.provisional && <span class="note">Endereço provisório · a confirmar</span>}
+          </dd>
+        </div>
+        <div>
+          <dt><Icon name="clock" /> Horário</dt>
+          <dd><p>{site.hours ?? <>Consulte os horários de atendimento pelo <a href={contactUrl} target="_blank" rel="noopener">{site.whatsapp ? 'WhatsApp' : 'Instagram'}</a>.</>}</p></dd>
+        </div>
+      </dl>
+      <a class="btn" href={mapsLink} target="_blank" rel="noopener">Como chegar <Icon name="arrow" /></a>
+    </div>
+
+    <div class="map" data-reveal style="--d:0.15s" data-map data-src={embed}>
+      <div class="map__placeholder">
+        <span class="map__pin"><Icon name="pin" /></span>
+        <p>{fullAddress}</p>
+        <button class="btn btn--ghost" type="button" data-map-load>Carregar mapa</button>
+        <small>O mapa é carregado do Google Maps somente após o clique.</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-map]').forEach((box) => {
+    box.querySelector('[data-map-load]')?.addEventListener('click', () => {
+      const iframe = document.createElement('iframe');
+      iframe.src = box.dataset.src!;
+      iframe.title = 'Mapa com a localização da Paula Cosméticos';
+      iframe.loading = 'lazy';
+      iframe.referrerPolicy = 'no-referrer-when-downgrade';
+      box.replaceChildren(iframe);
+    });
+  });
+</script>
+
+<style>
+  .loc { background: transparent; }
+  .loc__grid { display: grid; gap: 3rem; align-items: center; }
+  .loc__text .head { margin-bottom: 2rem; }
+  .loc__info { display: grid; gap: 1.6rem; margin: 0 0 2.2rem; }
+  .loc__info dt { display: flex; align-items: center; gap: 0.5rem; font-size: 0.7rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--rose-deep); margin-bottom: 0.4rem; }
+  .loc__info dt :global(svg) { width: 1.05rem; height: 1.05rem; }
+  .loc__info dd { margin: 0; display: grid; gap: 0.6rem; justify-items: start; font-size: 1.05rem; }
+  .loc__info address { font-style: normal; font-family: var(--serif); font-size: 1.5rem; line-height: 1.3; }
+
+  .map { position: relative; aspect-ratio: 4 / 3.4; overflow: hidden; border-radius: var(--radius); background-color: var(--nude); }
+  .map :global(iframe) { width: 100%; height: 100%; border: 0; filter: sepia(0.25) saturate(0.8); }
+  .map__placeholder {
+    position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 1rem; text-align: center; padding: 1.5rem;
+    /* Mapa estilizado (ruas) apenas decorativo */
+    background:
+      linear-gradient(28deg, transparent 47%, rgb(255 255 255 / 0.7) 47.5% 49.5%, transparent 50%),
+      linear-gradient(-62deg, transparent 58%, rgb(255 255 255 / 0.55) 58.5% 60%, transparent 60.5%),
+      linear-gradient(90deg, transparent 30%, rgb(255 255 255 / 0.45) 30.3% 31.6%, transparent 32%),
+      repeating-linear-gradient(0deg, transparent 0 46px, rgb(255 255 255 / 0.25) 46px 48px),
+      repeating-linear-gradient(90deg, transparent 0 62px, rgb(255 255 255 / 0.25) 62px 64px),
+      linear-gradient(160deg, #efe0d4, #e3c9bb);
+  }
+  .map__placeholder p { font-family: var(--serif); font-size: 1.35rem; max-width: 22rem; line-height: 1.3; }
+  .map__placeholder small { font-size: 0.75rem; color: var(--ink); max-width: 18rem; }
+  .map__pin { display: grid; place-items: center; width: 3.6rem; height: 3.6rem; border-radius: 50%; background: var(--rose-deep); color: var(--ivory); box-shadow: 0 0 0 10px rgb(214 174 175 / 0.45); animation: pulse 2.8s var(--ease) infinite; }
+  .map__pin :global(svg) { width: 1.5rem; height: 1.5rem; }
+  .map__placeholder .btn:not(:hover) { --bg: rgb(251 247 242 / 0.85); }
+  @keyframes pulse { 50% { box-shadow: 0 0 0 18px rgb(214 174 175 / 0.12); } }
+  @media (min-width: 960px) { .loc__grid { grid-template-columns: 0.85fr 1fr; gap: clamp(3rem, 7vw, 6rem); } }
+</style>

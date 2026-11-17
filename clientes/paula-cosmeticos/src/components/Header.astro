@@ -1,0 +1,122 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import { contactUrl } from '../data/site';
+
+const links = [
+  { href: '#categorias', label: 'Categorias' },
+  { href: '#destaques', label: 'Destaques' },
+  { href: '#marcas', label: 'Marcas' },
+  { href: '#a-loja', label: 'A loja' },
+  { href: '#instagram', label: 'Instagram' },
+  { href: '#visite', label: 'Visite' },
+];
+---
+<header class="header" data-header>
+  <div class="wrap header__bar">
+    <a class="header__logo" href="#topo" aria-label="Paula Cosméticos — início"><Logo height="4.3rem" /></a>
+
+    <nav class="nav" aria-label="Principal">
+      <ul>
+        {links.map((l) => <li><a class="link" href={l.href}>{l.label}</a></li>)}
+      </ul>
+    </nav>
+
+    <a class="btn btn--ghost header__cta" href={contactUrl} target="_blank" rel="noopener">Fale conosco</a>
+
+    <button class="header__toggle" type="button" aria-expanded="false" aria-controls="menu-mobile" data-toggle>
+      <span class="sr">Abrir menu</span>
+      <span class="i-open"><Icon name="menu" /></span>
+      <span class="i-close"><Icon name="close" /></span>
+    </button>
+  </div>
+
+  <div class="drawer" id="menu-mobile" data-drawer hidden>
+    <nav aria-label="Menu móvel">
+      <ul>
+        {links.map((l, i) => <li style={`--i:${i}`}><a href={l.href}>{l.label}</a></li>)}
+        <li style={`--i:${links.length}`}><a href="#contato">Contato</a></li>
+      </ul>
+    </nav>
+    <a class="btn" href={contactUrl} target="_blank" rel="noopener">Fale conosco <Icon name="arrow" /></a>
+  </div>
+</header>
+
+<script>
+  const header = document.querySelector<HTMLElement>('[data-header]')!;
+  const toggle = header.querySelector<HTMLButtonElement>('[data-toggle]')!;
+  const drawer = header.querySelector<HTMLElement>('[data-drawer]')!;
+
+  const onScroll = () => header.classList.toggle('is-solid', window.scrollY > 40);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  const setOpen = (open: boolean) => {
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.querySelector('.sr')!.textContent = open ? 'Fechar menu' : 'Abrir menu';
+    header.classList.toggle('is-open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+    if (open) {
+      drawer.hidden = false;
+      requestAnimationFrame(() => drawer.classList.add('is-open'));
+    } else {
+      drawer.classList.remove('is-open');
+      setTimeout(() => { if (!header.classList.contains('is-open')) drawer.hidden = true; }, 450);
+    }
+  };
+  toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+  drawer.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && header.classList.contains('is-open')) { setOpen(false); toggle.focus(); }
+  });
+  window.matchMedia('(min-width: 960px)').addEventListener('change', (e) => { if (e.matches) setOpen(false); });
+</script>
+
+<style>
+  .header {
+    position: fixed; inset: 0 0 auto; z-index: 50;
+    transition: background 0.6s var(--ease), box-shadow 0.6s var(--ease), backdrop-filter 0.6s var(--ease);
+  }
+  .header.is-solid, .header.is-open {
+    background: rgb(250 245 239 / 0.88);
+    backdrop-filter: blur(14px) saturate(1.2);
+    -webkit-backdrop-filter: blur(14px) saturate(1.2);
+    box-shadow: 0 1px 0 var(--line);
+  }
+  .header__bar { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; height: 5rem; transition: height 0.6s var(--ease); }
+  .is-solid .header__bar { height: 5rem; }
+  .header__logo { text-decoration: none; display: block; line-height: 0; }
+
+  .nav, .header__cta { display: none; }
+  .nav ul { display: flex; gap: clamp(1.25rem, 2.4vw, 2.4rem); list-style: none; margin: 0; padding: 0; }
+
+  .header__toggle {
+    display: grid; place-items: center; width: 2.9rem; height: 2.9rem; margin-right: -0.5rem;
+    background: none; border: 0; color: var(--ink); cursor: pointer;
+  }
+  .header__toggle :global(svg) { width: 1.6rem; height: 1.6rem; }
+  .i-close, .is-open .i-open { display: none; }
+  .is-open .i-close { display: block; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+  .drawer {
+    position: fixed; inset: 5rem 0 0; z-index: -1;
+    display: flex; flex-direction: column; justify-content: space-between; gap: 2rem;
+    padding: 2rem var(--gutter) 2.5rem;
+    background: var(--ivory);
+    opacity: 0; transform: translateY(-8px);
+    transition: opacity 0.45s var(--ease), transform 0.45s var(--ease);
+  }
+  .drawer[hidden] { display: none; }
+  .drawer.is-open { opacity: 1; transform: none; }
+  .drawer ul { list-style: none; margin: 0; padding: 0; }
+  .drawer li { border-bottom: 1px solid var(--line); opacity: 0; transform: translateY(12px); transition: 0.6s var(--ease) calc(0.05s * var(--i) + 0.1s); }
+  .drawer.is-open li { opacity: 1; transform: none; }
+  .drawer li a { display: block; padding: 1rem 0; font-family: var(--serif); font-size: 1.9rem; text-decoration: none; }
+
+  @media (min-width: 960px) {
+    .nav, .header__cta { display: block; }
+    .header__cta { display: inline-flex; min-height: 2.6rem; padding: 0.6rem 1.3rem; }
+    .header__toggle, .drawer { display: none; }
+  }
+</style>

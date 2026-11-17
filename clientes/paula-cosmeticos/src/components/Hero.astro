@@ -1,0 +1,69 @@
+---
+import Icon from './Icon.astro';
+import { contactUrl, contactLabel, site } from '../data/site';
+---
+<section class="hero" id="topo" aria-labelledby="hero-title">
+  <div class="hero__media" aria-hidden="true">
+    <!-- Imagem ilustrativa: substituir por fotografia oficial da marca. -->
+    <img src="/images/hero.svg" alt="" width="1600" height="1000" fetchpriority="high" decoding="async" />
+  </div>
+
+  <div class="wrap hero__content">
+    <p class="eyebrow hero__in" style="--d:0.2s">{site.address.city} · {site.address.state}</p>
+    <h1 id="hero-title" class="hero__title hero__in" style="--d:0.35s">
+      Beleza com <em>cuidado</em><br /> em cada detalhe
+    </h1>
+    <p class="hero__lead hero__in" style="--d:0.55s">
+      Cosméticos selecionados para a sua rotina de cuidado, com atendimento próximo e atencioso.
+    </p>
+    <div class="hero__actions hero__in" style="--d:0.7s">
+      <a class="btn" href="#categorias">Conhecer a loja <Icon name="arrow" /></a>
+      <a class="btn btn--ghost" href={contactUrl} target="_blank" rel="noopener"><Icon name={site.whatsapp ? 'whatsapp' : 'message'} /> {contactLabel}</a>
+    </div>
+  </div>
+
+  <a class="hero__scroll" href="#categorias" aria-label="Rolar para as categorias"><span></span></a>
+</section>
+
+<style>
+  .hero {
+    position: relative; isolation: isolate; overflow: hidden;
+    min-height: 100svh; display: flex; align-items: flex-end;
+    padding-block: 7rem 3.5rem; background: var(--ivory);
+  }
+  .hero__media { position: absolute; inset: 0 0 auto; height: 54%; z-index: -1; overflow: hidden; }
+  @media (min-width: 600px) { .hero__media { height: 60%; } .hero__media img { object-position: 72% 55%; } }
+  .hero__media img {
+    width: 100%; height: 100%; object-fit: cover; object-position: 76% 58%;
+    animation: hero-zoom 22s var(--ease) both;
+  }
+  /* Véu marfim para legibilidade: de baixo no celular, da esquerda no desktop. */
+  .hero__media::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to top, var(--ivory) 2%, rgb(251 247 242 / 0.7) 26%, rgb(251 247 242 / 0) 55%);
+  }
+  .hero__content { display: grid; gap: 1.4rem; }
+  .hero__title { font-size: clamp(2.7rem, 10.5vw, 5.6rem); line-height: 1; }
+  .hero__title em { font-style: italic; color: var(--rose-deep); }
+  .hero__lead { color: var(--ink-soft); max-width: 30rem; font-size: 1.05rem; }
+  .hero__actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 0.4rem; }
+
+  .hero__in { opacity: 0; transform: translateY(22px); animation: hero-in 1.3s var(--ease) var(--d) both; }
+
+  .hero__scroll { position: absolute; left: 50%; bottom: 1.4rem; width: 1px; height: 3rem; background: rgb(63 42 45 / 0.15); overflow: hidden; display: none; }
+  .hero__scroll span { position: absolute; inset: 0; background: var(--ink); animation: scroll-line 2.6s var(--ease) infinite; }
+
+  @keyframes hero-zoom { from { transform: scale(1.12); } to { transform: scale(1); } }
+  @keyframes hero-in { to { opacity: 1; transform: none; } }
+  @keyframes scroll-line { 0% { transform: translateY(-100%); } 60%, 100% { transform: translateY(100%); } }
+
+  @media (min-width: 1100px) {
+    .hero { align-items: center; padding-block: 8rem 6rem; }
+    .hero__media { inset: 0; height: auto; }
+    .hero__media img { object-position: 70% 50%; }
+    .hero__media::after {
+      background: linear-gradient(100deg, rgb(251 247 242 / 0.95) 18%, rgb(251 247 242 / 0.6) 45%, rgb(251 247 242 / 0) 68%);
+    }
+    .hero__scroll { display: block; }
+  }
+</style>

@@ -24,7 +24,12 @@ Registro do andamento do projeto. Atualize ao concluir cada etapa.
 
 ## Em andamento
 
-- Nenhuma etapa em andamento. Executar `/compact` antes de iniciar a próxima frente.
+- **Protótipo Honre Cosméticos** (`clientes/honre-cosmeticos/`): site demonstrativo em Astro
+  7.4.2 concluído e testado com Playwright (desktop 1440/1180, tablet 820, celular 390).
+  Aguardando revisão; **sem commit**. Pendências em `clientes/honre-cosmeticos/README.md`
+  (endereço, horários, fotos e logotipo oficial). WhatsApp e grupo VIP já configurados.
+- Skills social-media-audit, Frontend Design e MotionSites não estão instaladas; o
+  Instagram e bancos de imagens estão bloqueados na rede do ambiente.
 
 ## Próximas etapas
 

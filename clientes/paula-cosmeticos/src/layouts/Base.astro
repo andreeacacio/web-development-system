@@ -1,0 +1,82 @@
+---
+import '@fontsource/cormorant-garamond/400.css';
+import '@fontsource/cormorant-garamond/400-italic.css';
+import '@fontsource/cormorant-garamond/500.css';
+import '@fontsource-variable/jost';
+import '../styles/global.css';
+import { site, fullAddress } from '../data/site';
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Store',
+  name: site.name,
+  description: site.description,
+  url: canonical.href,
+  sameAs: [site.instagram.url],
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: site.address.street,
+    addressLocality: site.address.city,
+    addressRegion: site.address.state,
+    addressCountry: 'BR',
+  },
+};
+---
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{site.title}</title>
+    <meta name="description" content={site.description} />
+    <!-- Protótipo: não indexar até a versão definitiva. -->
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#D6AEAF" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={site.title} />
+    <meta property="og:description" content={site.description} />
+    <meta property="og:locale" content="pt_BR" />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body>
+    <div class="ambient" aria-hidden="true">
+      <span class="ambient__blob ambient__blob--rose"></span>
+      <span class="ambient__blob ambient__blob--champagne"></span>
+      <span class="ambient__blob ambient__blob--cream"></span>
+      <span class="ambient__wave ambient__wave--1">
+        <svg viewBox="0 0 1440 300" preserveAspectRatio="none"><defs><linearGradient id="silk" x1="0" x2="1"><stop offset="0" stop-color="#d6aeaf" stop-opacity="0.45"/><stop offset="0.5" stop-color="#f7ece4" stop-opacity="0.8"/><stop offset="1" stop-color="#e9d3c2" stop-opacity="0.45"/></linearGradient></defs><path d="M0 150 C 240 60, 480 240, 720 150 S 1200 60, 1440 150 L1440 300 L0 300 Z" fill="url(#silk)"/></svg>
+      </span>
+      <span class="ambient__wave ambient__wave--2">
+        <svg viewBox="0 0 1440 300" preserveAspectRatio="none"><path d="M0 120 C 300 220, 520 40, 780 130 S 1260 230, 1440 110 L1440 300 L0 300 Z" fill="#e9cfc9" fill-opacity="0.5"/></svg>
+      </span>
+      <span class="ambient__sheen"></span>
+      <span class="ambient__spark" style="--x:12%;--y:22%;--d:0s"></span>
+      <span class="ambient__spark" style="--x:78%;--y:14%;--d:2.5s"></span>
+      <span class="ambient__spark" style="--x:64%;--y:58%;--d:5s"></span>
+      <span class="ambient__spark" style="--x:26%;--y:74%;--d:3.2s"></span>
+      <span class="ambient__spark" style="--x:90%;--y:82%;--d:6.4s"></span>
+      <span class="ambient__spark" style="--x:44%;--y:40%;--d:1.4s"></span>
+    </div>
+    <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+    <slot />
+    <script>
+      // Revelação suave ao rolar; respeita "reduzir movimento".
+      const els = document.querySelectorAll('[data-reveal]');
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce || !('IntersectionObserver' in window)) {
+        els.forEach((el) => el.classList.add('is-visible'));
+      } else {
+        const io = new IntersectionObserver(
+          (entries) => entries.forEach((e) => {
+            if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
+          }),
+          { rootMargin: '0px 0px -8% 0px', threshold: 0.12 },
+        );
+        els.forEach((el) => io.observe(el));
+      }
+    </script>
+  </body>
+</html>

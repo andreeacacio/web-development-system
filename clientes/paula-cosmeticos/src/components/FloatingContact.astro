@@ -1,0 +1,25 @@
+---
+import Icon from './Icon.astro';
+import { site, contactUrl, contactLabel } from '../data/site';
+---
+<a class="float" href={contactUrl} target="_blank" rel="noopener" aria-label={contactLabel} data-float>
+  <Icon name={site.whatsapp ? 'whatsapp' : 'instagram'} />
+</a>
+<script>
+  const btn = document.querySelector<HTMLElement>('[data-float]')!;
+  const update = () => btn.classList.toggle('is-on', window.scrollY > window.innerHeight * 0.6);
+  update();
+  window.addEventListener('scroll', update, { passive: true });
+</script>
+<style>
+  .float {
+    position: fixed; right: max(1rem, env(safe-area-inset-right)); bottom: max(1rem, env(safe-area-inset-bottom)); z-index: 40;
+    display: grid; place-items: center; width: 3.5rem; height: 3.5rem; border-radius: 50%;
+    background: var(--ink); color: var(--ivory); box-shadow: 0 10px 30px rgb(63 42 45 / 0.25);
+    opacity: 0; transform: translateY(16px) scale(0.9); pointer-events: none;
+    transition: opacity 0.5s var(--ease), transform 0.5s var(--ease), background 0.4s var(--ease);
+  }
+  .float.is-on { opacity: 1; transform: none; pointer-events: auto; }
+  .float:hover { background: var(--rose-deep); }
+  .float :global(svg) { width: 1.5rem; height: 1.5rem; }
+</style>

@@ -1,0 +1,48 @@
+---
+const values = [
+  { title: 'Curadoria', text: 'Produtos escolhidos com atenção à qualidade e às necessidades de cada cliente.' },
+  { title: 'Atendimento', text: 'Orientação próxima para ajudar você a montar a rotina ideal.' },
+  { title: 'Cuidado', text: 'Um espaço acolhedor para descobrir, experimentar e se presentear.' },
+];
+---
+<section class="section about" id="a-loja" aria-labelledby="about-title">
+  <div class="wrap about__grid">
+    <figure class="about__media" data-reveal>
+      <img src="/images/loja.svg" alt="Ilustração de prateleiras com cosméticos em uma loja" width="900" height="1100" loading="lazy" decoding="async" />
+      <figcaption class="note">Imagem ilustrativa · substituir por foto da loja</figcaption>
+    </figure>
+
+    <div class="about__text">
+      <div class="head" data-reveal>
+        <p class="eyebrow">A loja</p>
+        <h2 id="about-title" class="title">Um espaço feito para <em>você se cuidar</em></h2>
+        <p class="lead">
+          A Paula Cosméticos reúne beleza, cuidado e atenção em um só lugar, no Centro de Morro da Fumaça.
+          Venha conhecer de perto e receber uma indicação pensada para você.
+        </p>
+      </div>
+      <ol class="values" role="list">
+        {values.map((v, i) => (
+          <li data-reveal style={`--d:${i * 0.12}s`}>
+            <span class="values__n">{String(i + 1).padStart(2, '0')}</span>
+            <div><h3>{v.title}</h3><p>{v.text}</p></div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about__grid { display: grid; gap: 3rem; align-items: center; }
+  .about__media { margin: 0 auto; width: 100%; max-width: 30rem; position: relative; display: grid; gap: 0.9rem; justify-items: start; }
+  .about__media img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 12rem 12rem var(--radius) var(--radius); }
+  .values { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+  .values li { display: grid; grid-template-columns: 2.5rem 1fr; gap: 1rem; padding-block: 1.4rem; border-bottom: 1px solid var(--line); }
+  .values__n { font-size: 0.7rem; letter-spacing: 0.2em; color: var(--rose-deep); padding-top: 0.55rem; }
+  .values h3 { font-size: 1.6rem; margin-bottom: 0.2rem; }
+  .values p { color: var(--ink-soft); font-size: 0.95rem; }
+  @media (min-width: 960px) {
+    .about__grid { grid-template-columns: 0.9fr 1fr; gap: clamp(3rem, 7vw, 7rem); }
+  }
+</style>
